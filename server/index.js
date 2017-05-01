@@ -1,5 +1,6 @@
 // Dependencies
 // ============
+var ejs = require('ejs')
 var express = require('express')
 
 var port = 3000
@@ -13,6 +14,11 @@ var logRequest = (request, response, next) => {
 }
 
 var app = express()
+
+app.set('views', 'public')
+app.engine('html', ejs.renderFile)
+app.set('view engine', 'html')
+
 app.use(logRequest)
 
 app.listen(port, host, (request, response) => {
@@ -20,7 +26,7 @@ app.listen(port, host, (request, response) => {
 })
 
 app.get('/', (request, response) => {
-  response.send('Served GET request')
+  response.render('index')
 })
 
 app.post('/', (request, response) => {
