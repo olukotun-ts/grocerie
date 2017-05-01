@@ -7,17 +7,19 @@
     "test": "tests"
   },
   "dependencies": {
+    "angular": "^1.6.4",
     "body-parser": "^1.17.1",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "mongoose": "^4.9.7"
   },
   "devDependencies": {
+    "live-server": "^1.2.0",
     "nodemon": "^1.11.0"
   },
   "scripts": {
-    "start": "node server/index.js",
-    "start:dev": "nodemon server/index.js",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

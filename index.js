@@ -15,9 +15,9 @@ var logRequest = (request, response, next) => {
 
 var app = express()
 
-app.set('views', 'public')
-app.engine('html', ejs.renderFile)
-app.set('view engine', 'html')
+app.set('views', __dirname)
+// app.engine('html', ejs.renderFile)
+app.set('view engine', 'ejs')
 
 app.use(logRequest)
 

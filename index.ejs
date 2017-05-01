@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> grocerie </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body>
+  <div ng-app="grocerie" ng-controller="appCtrl">
+    <h1> Grocery list </h1>
+      <input type="text" ng-model="item"/>
+      <button ng-click="add()"> Add </button>
+      <div>
+        <ul>
+          <li ng-repeat="item in items">
+            {{item.name}}
+          </li>
+        </ul>
+      </div>
+  </div>
+  <script>
+  angular.module('grocerie', [])
+  .controller('appCtrl', function ($scope) {
+    $scope.items = []  // Arr of {name: itemName, status: isBought}
+    $scope.add = function () {
+      $scope.items.push({name: $scope.item, status: false})
+    }
+
+    $scope.toggleStatus = function (item) {
+      item.status = !item.status
+    }
+  })
+  </script>
+</body>
+</html>
