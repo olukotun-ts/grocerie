@@ -1,0 +1,32 @@
+{
+  "name": "grocerie",
+  "version": "1.0.0",
+  "description": "A simple, hassle-free grocery list manager.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "start:dev": "nodemon server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otsam88/grocerie.git"
+  },
+  "author": "Sam Olukotun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/otsam88/grocerie/issues"
+  },
+  "homepage": "https://github.com/otsam88/grocerie#readme"
+}
