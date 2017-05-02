@@ -30,5 +30,5 @@ app.get('/', (request, response) => {
 })
 
 app.post('/', (request, response) => {
-  response.send('Served POST request')
+  // @todo: Send proper response.
 })
