@@ -41,11 +41,7 @@
       template: `
         <h1> Grocery list </h1>
         <div ng-controller="addCtrl">
-          <form>
-            <input type="text" ng-model="item"/>
-            <button ng-click="add()"> Add to list </button>
-            <button ng-click="save()"> Save for later </button>
-          </form>
+        <app-form></app-form>
           <ul>
             <li ng-repeat="item in items">
               {{item.name}}
@@ -58,6 +54,17 @@
 
           </ul>
         </div>
+      `
+    }
+  })
+  .directive('appForm', function () {
+    return {
+      template: `
+        <form>
+          <input type="text" ng-model="item"/>
+          <button ng-click="add()"> Add to list </button>
+          <button ng-click="save()"> Save for later </button>
+        </form>
       `
     }
   })
