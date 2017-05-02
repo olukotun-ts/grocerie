@@ -59,8 +59,9 @@ var saveItems = (items, next) => {
 
   next()
 }
-// =================
 
+// Server config.
+// ==============
 var app = express()
 
 app.set('views', __dirname)

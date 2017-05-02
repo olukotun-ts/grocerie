@@ -5,24 +5,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
 <body>
-  <div ng-app="grocerie" ng-controller="appCtrl">
-    <h1> Grocery list </h1>
-    <form>
-      <input type="text" ng-model="item"/>
-      <button ng-click="add()"> Add to list </button>
-      <button ng-click="save()"> Save for later </button>
-    </form>
-    <div>
-      <ul>
-        <li ng-repeat="item in items">
-          {{item.name}}
-        </li>
-      </ul>
-    </div>
+  <div ng-app="grocerie">
+    <app></app>
   </div>
   <script>
   angular.module('grocerie', [])
-  .controller('appCtrl', function ($scope, $http) {
+  .controller('addCtrl', function ($scope, $http) {
+    console.log('addCtrl scope:', $scope)
     $scope.items = []  // Arr of {name: itemName, status: isBought}
 
     $scope.add = function () {
@@ -42,6 +31,41 @@
 
     $scope.toggleStatus = function (item) {
       item.status = !item.status
+    }
+  })
+  .controller('savedCtrl', function ($scope, $http) {
+    console.log('savedCtrl scope:', $scope)
+  })
+  .directive('app', function () {
+    return {
+      template: `
+        <h1> Grocery list </h1>
+        <div ng-controller="addCtrl">
+          <form>
+            <input type="text" ng-model="item"/>
+            <button ng-click="add()"> Add to list </button>
+            <button ng-click="save()"> Save for later </button>
+          </form>
+          <ul>
+            <li ng-repeat="item in items">
+              {{item.name}}
+            </li>
+          </ul>
+        </div>
+        <div ng-controller="savedCtrl">
+          <h2> Saved lists </h2>
+          <ul>
+
+          </ul>
+        </div>
+      `
+    }
+  })
+  .directive('appList', function () {
+    return {
+      template: `
+
+      `
     }
   })
   </script>
