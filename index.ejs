@@ -10,8 +10,7 @@
   </div>
   <script>
   angular.module('grocerie', [])
-  .controller('addCtrl', function ($scope, $http) {
-    console.log('addCtrl scope:', $scope)
+  .controller('appCtrl', function ($scope, $http) {
     $scope.items = []  // Arr of {name: itemName, status: isBought}
 
     $scope.add = function () {
@@ -34,25 +33,18 @@
     }
   })
   .controller('savedCtrl', function ($scope, $http) {
-    console.log('savedCtrl scope:', $scope)
   })
   .directive('app', function () {
     return {
       template: `
         <h1> Grocery list </h1>
-        <div ng-controller="addCtrl">
-        <app-form></app-form>
-          <ul>
-            <li ng-repeat="item in items">
-              {{item.name}}
-            </li>
-          </ul>
+        <div ng-controller="appCtrl">
+          <app-form></app-form>
+          <app-list items="items"></app-list>
         </div>
         <div ng-controller="savedCtrl">
           <h2> Saved lists </h2>
-          <ul>
-
-          </ul>
+          <app-list></app-list>
         </div>
       `
     }
@@ -70,8 +62,15 @@
   })
   .directive('appList', function () {
     return {
+      scope: {
+        items: '<'
+      },
       template: `
-
+        <ul>
+          <li ng-repeat="item in items">
+            {{item.name}}
+          </li>
+        </ul>
       `
     }
   })
