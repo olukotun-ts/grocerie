@@ -20,8 +20,6 @@ app.set('view engine', 'ejs')
 
 app.use(logRequest)
 app.use(parser.json({strict: false}))
-app.use(parser.text())
-app.use(parser.urlencoded({extended: true}))
 
 app.listen(port, host, (request, response) => {
   console.log(`Listening on ${host}:${port}...`)
@@ -33,4 +31,5 @@ app.get('/', (request, response) => {
 
 app.post('/', (request, response) => {
   // @todo: Send proper response.
+  console.log('Request body on POST:', request.body)
 })

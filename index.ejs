@@ -27,13 +27,16 @@
 
     $scope.add = function () {
       $scope.items.push({name: $scope.item, status: false})
+      $scope.item = ''
     }
 
     $scope.save = function () {
       /* Triggers a POST request to server. Server's handler for this request should write list to storage.
       */
-      $http.post('/', {
-
+      $http({
+        url: '/',
+        method: 'POST',
+        data: JSON.stringify($scope.items)
       })
     }
 
