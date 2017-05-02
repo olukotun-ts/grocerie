@@ -7,9 +7,10 @@
 <body>
   <div ng-app="grocerie" ng-controller="appCtrl">
     <h1> Grocery list </h1>
-    <form action="/" method="POST">
+    <form>
       <input type="text" ng-model="item"/>
-      <button ng-click="add()"> Add </button>
+      <button ng-click="add()"> Add to list </button>
+      <button ng-click="save()"> Save for later </button>
     </form>
     <div>
       <ul>
@@ -21,11 +22,19 @@
   </div>
   <script>
   angular.module('grocerie', [])
-  .controller('appCtrl', function ($scope) {
+  .controller('appCtrl', function ($scope, $http) {
     $scope.items = []  // Arr of {name: itemName, status: isBought}
+
     $scope.add = function () {
       $scope.items.push({name: $scope.item, status: false})
+    }
 
+    $scope.save = function () {
+      /* Triggers a POST request to server. Server's handler for this request should write list to storage.
+      */
+      $http.post('/', {
+
+      })
     }
 
     $scope.toggleStatus = function (item) {

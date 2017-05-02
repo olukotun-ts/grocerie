@@ -23,7 +23,7 @@ Once the project moves into development, the press release can be used as a touc
   > A simple, hassle-free grocery list manager.
 
 ## Summary ##
-  > This app provides a simple, intuitive interface for a user to add items to a grocery list and cross them out as they are purchased.
+  > This app provides a simple, intuitive interface for a user to add items to a grocery list and cross them out as they are purchased. The user can also save the list for later.
 
 ## Problem ##
   > Describe the problem your product solves.

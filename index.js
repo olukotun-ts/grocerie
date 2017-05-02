@@ -1,7 +1,7 @@
 // Dependencies
 // ============
-var ejs = require('ejs')
 var express = require('express')
+var parser = require('body-parser')
 
 var port = 3000
 var host = '127.0.0.1'
@@ -16,10 +16,12 @@ var logRequest = (request, response, next) => {
 var app = express()
 
 app.set('views', __dirname)
-// app.engine('html', ejs.renderFile)
 app.set('view engine', 'ejs')
 
 app.use(logRequest)
+app.use(parser.json({strict: false}))
+app.use(parser.text())
+app.use(parser.urlencoded({extended: true}))
 
 app.listen(port, host, (request, response) => {
   console.log(`Listening on ${host}:${port}...`)
