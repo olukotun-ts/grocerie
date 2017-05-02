@@ -12,6 +12,7 @@
   angular.module('grocerie', [])
   .controller('appCtrl', function ($scope, $http) {
     $scope.storage = {items: [], listId: null}  // items: [{name: itemName, status: isBought}, ...]
+    $scope.savedLists = {}  // Preferred data structure: {listId: status}
 
     $scope.add = function () {
       $scope.storage.items.push({name: $scope.item, status: false})
@@ -27,7 +28,8 @@
         method: 'POST',
         data: JSON.stringify($scope.storage)
       }).then(function (response) {
-        console.log(response)
+        $scope.savedLists[response.data] = false
+        $scope.storage.items = []
       })
     }
 
@@ -36,6 +38,7 @@
     }
   })
   .controller('savedCtrl', function ($scope, $http) {
+
   })
   .directive('app', function () {
     return {
@@ -44,10 +47,9 @@
         <div ng-controller="appCtrl">
           <app-form></app-form>
           <app-list items="storage.items"></app-list>
-        </div>
-        <div ng-controller="savedCtrl">
+
           <h2> Saved lists </h2>
-          <app-list></app-list>
+          <saved-list items="savedLists"></saved-list>
         </div>
       `
     }
@@ -72,6 +74,20 @@
         <ul>
           <li ng-repeat="item in items">
             {{item.name}}
+          </li>
+        </ul>
+      `
+    }
+  })
+  .directive('savedList', function () {
+    return {
+      scope: {
+        items: '<'
+      },
+      template: `
+        <ul>
+          <li ng-repeat="(item, status) in items">
+            {{item}}
           </li>
         </ul>
       `

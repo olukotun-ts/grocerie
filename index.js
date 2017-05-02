@@ -88,7 +88,7 @@ app.post('/', (request, response) => {
     if (error) {
       response.sendStatus(500)
     } else {
-      response.send(request.body)
+      response.send(request.body.listId)
     }
   })
 })
