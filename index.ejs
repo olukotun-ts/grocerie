@@ -11,20 +11,23 @@
   <script>
   angular.module('grocerie', [])
   .controller('appCtrl', function ($scope, $http) {
-    $scope.items = []  // Arr of {name: itemName, status: isBought}
+    $scope.storage = {items: [], listId: null}  // items: [{name: itemName, status: isBought}, ...]
 
     $scope.add = function () {
-      $scope.items.push({name: $scope.item, status: false})
+      $scope.storage.items.push({name: $scope.item, status: false})
       $scope.item = ''
     }
 
     $scope.save = function () {
       /* Triggers a POST request to server. Server's handler for this request should write list to storage.
       */
+      $scope.storage.listId = prompt('Name your list:')
       $http({
         url: '/',
         method: 'POST',
-        data: JSON.stringify($scope.items)
+        data: JSON.stringify($scope.storage)
+      }).then(function (response) {
+        console.log(response)
       })
     }
 
@@ -40,7 +43,7 @@
         <h1> Grocery list </h1>
         <div ng-controller="appCtrl">
           <app-form></app-form>
-          <app-list items="items"></app-list>
+          <app-list items="storage.items"></app-list>
         </div>
         <div ng-controller="savedCtrl">
           <h2> Saved lists </h2>

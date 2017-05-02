@@ -17,7 +17,8 @@ db.once('open', () => {
 // ================
 var itemSchema = mongoose.Schema({
   name: String,
-  status: Boolean
+  status: Boolean,
+  listName: String
 })
 
 var Item = mongoose.model('Item', itemSchema)
@@ -37,15 +38,17 @@ var logRequest = (request, response, next) => {
   next()
 }
 
-var saveItems = (items, next) => {
+var saveItems = (items, recordId, next) => {
   /* Write items array to db.
+     Tag all items in this run with recordId.
      Takes next callback for async chains.
      Will break if client-side storage is changed from [] to {}.
   */
   for (var item of items) {
     var newItem = new Item({
       name: item.name,
-      status: item.status
+      status: item.status,
+      listName: recordId
     })
 
     newItem.save((error, newItem) => {
@@ -81,11 +84,11 @@ app.get('/', (request, response) => {
 })
 
 app.post('/', (request, response) => {
-  saveItems(request.body, (error) => {
+  saveItems(request.body.items, request.body.listId, (error) => {
     if (error) {
       response.sendStatus(500)
     } else {
-      response.send()
+      response.send(request.body)
     }
   })
 })
