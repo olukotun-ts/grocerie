@@ -22,24 +22,44 @@ var itemSchema = mongoose.Schema({
 
 var Item = mongoose.model('Item', itemSchema)
 
-// var item = new Item
-// item.name = 'banana'
-// item.status = true
-// item.save(() => {
-//   console.log('Seeded database.')
-// })
 
 // Server stuff.
 // =============
 var port = 3000
 var host = '127.0.0.1'
 
+// Helper functions.
+// =================
 var logRequest = (request, response, next) => {
   /* Middleware that logs what type of request came in.
   */
   console.log(`Serving ${request.method} request...`)
   next()
 }
+
+var saveItems = (items, next) => {
+  /* Write items array to db.
+     Takes next callback for async chains.
+     Will break if client-side storage is changed from [] to {}.
+  */
+  for (var item of items) {
+    var newItem = new Item({
+      name: item.name,
+      status: item.status
+    })
+
+    newItem.save((error, newItem) => {
+      if (error) {
+        console.log(error)
+        console.log('Error saving to database. Item:', newItem)
+        next(error)
+      }
+    })
+  }
+
+  next()
+}
+// =================
 
 var app = express()
 
@@ -60,6 +80,13 @@ app.get('/', (request, response) => {
 })
 
 app.post('/', (request, response) => {
-  // @todo: Send proper response.
-  console.log('Request body on POST:', request.body)
+  saveItems(request.body, (error) => {
+    if (error) {
+      response.sendStatus(500)
+    } else {
+      response.send()
+    }
+  })
 })
+
+
