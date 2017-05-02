@@ -19,6 +19,10 @@
       $scope.item = ''
     }
 
+    $scope.getList = function (listName) {
+      console.log('You clicked on:', listName)
+    }
+
     $scope.save = function () {
       /* Triggers a POST request to server. Server's handler for this request should write list to storage.
       */
@@ -37,9 +41,6 @@
       item.status = !item.status
     }
   })
-  .controller('savedCtrl', function ($scope, $http) {
-
-  })
   .directive('app', function () {
     return {
       template: `
@@ -48,8 +49,11 @@
           <app-form></app-form>
           <app-list items="storage.items"></app-list>
 
-          <h2> Saved lists </h2>
-          <saved-list items="savedLists"></saved-list>
+          <h3> Saved lists </h3>
+          <saved-list items="savedLists" on-click="getList"></saved-list>
+
+          <h3> List details </h3>
+
         </div>
       `
     }
@@ -82,11 +86,12 @@
   .directive('savedList', function () {
     return {
       scope: {
-        items: '<'
+        items: '<',
+        onClick: '<'
       },
       template: `
         <ul>
-          <li ng-repeat="(item, status) in items">
+          <li ng-repeat="(item, status) in items" ng-click="onClick(item)">
             {{item}}
           </li>
         </ul>
