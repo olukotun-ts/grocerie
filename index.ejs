@@ -20,7 +20,13 @@
     }
 
     $scope.getList = function (listName) {
-      console.log('You clicked on:', listName)
+      $http({
+        url: '/query',
+        method: 'GET',
+        params: {listName: listName}
+      }).then(function (response) {
+        console.log(response)
+      })
     }
 
     $scope.save = function () {

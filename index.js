@@ -83,6 +83,20 @@ app.get('/', (request, response) => {
   response.render('index')
 })
 
+app.get('/query', (request, response) => {
+  Item.find(request.query)
+    .select({name: 1, status: 1, _id: 0})
+    .exec((error, result) => {
+      if (error) {
+        response.sendStatus(500)
+        console.log(error)
+        console.log('Error querying database. Query:', request.query)
+      } else {
+        response.send(result)
+      }
+    })
+})
+
 app.post('/', (request, response) => {
   saveItems(request.body.items, request.body.listId, (error) => {
     if (error) {
