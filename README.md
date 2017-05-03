@@ -1,4 +1,5 @@
 # grocerie #
+  > A hassle-free grocery list manager.
 
 <!--
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -16,29 +17,8 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
 
-## grocerie ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
-
-## Sub-Heading ##
-  > A simple, hassle-free grocery list manager.
-
 ## Summary ##
   > This app provides a simple, intuitive interface for a user to add items to a grocery list. The user can also save the list for later. Clicking on the saved list displays the items that were added to the list.
 
-## Problem ##
-  > Describe the problem your product solves.
-
-## Solution ##
-  > Describe how your product elegantly solves the problem.
-
-## Quote from You ##
-  > A quote from a spokesperson in your company.
-
 ## How to Get Started ##
-  > Describe how easy it is to get started.
-
-## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-
-## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Download the project. Open a terminal in the root directory. At the terminal, type "npm start" (without the quotes). Navigate your browser to localhost:3000. That's it!
